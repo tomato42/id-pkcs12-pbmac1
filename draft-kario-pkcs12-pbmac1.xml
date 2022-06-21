@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+
+<!ENTITY RFC2119 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC6194 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6194.xml">
+<!ENTITY RFC7292 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7292.xml">
+<!ENTITY RFC7914 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7914.xml">
+<!ENTITY RFC8018 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8018.xml">
+
+]>
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+<?rfc strict="yes" ?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="4"?>
+<?rfc symrefs="yes"?>
+<!-- use symbolic references tags, i.e, [RFC2119] instead of [1] -->
+<?rfc sortrefs="yes" ?>
+<!-- control vertical white space 
+     (using these PIs as follows is recommended by the RFC Editor) -->
+<?rfc compact="yes" ?>
+<!-- do not start each main section on a new page -->
+<?rfc subcompact="no" ?>
+<!-- keep one blank line between list items -->
+<!-- end of list of popular I-D processing instructions -->
+<rfc category="info" docName="draft-kario-pkcs12-pbmac1-01" ipr="trust200902"
+    updates="RFC7292">
+  <!-- ***** FRONT MATTER ***** -->
+
+  <front>
+    <title abbrev="PBMAC1 in PKCS#12">Use of Password Based Message
+    Authentication Code 1 (PBMAC1) in PKCS #12 Syntax</title>
+
+    <author fullname="Hubert Kario" initials="H." role="editor"
+            surname="Kario">
+      <organization>Red Hat, Inc.</organization>
+
+      <address>
+        <postal>
+          <street>Purkynova 115</street>
+
+          <city>Brno</city>
+
+          <region></region>
+
+          <code>61200</code>
+
+          <country>Czechia</country>
+        </postal>
+
+        <phone></phone>
+
+        <email>hkario@redhat.com</email>
+      </address>
+    </author>
+
+    <date month="June" year="2022" />
+
+    <area>General</area>
+
+    <workgroup>Internet Engineering Task Force</workgroup>
+
+    <keyword>pbmac1, pkcs12, pbkdf2</keyword>
+
+    <abstract>
+        <t>This document specifies additions and amendments to <xref
+            target="RFC7292">RFC 7292</xref>. It defines a way to use
+            the Password Based Message Authentication Code 1, defined
+            in <xref target="RFC8018">RFC 8018</xref>, inside the PKCS #12
+            syntax. The purpose of this specification is to permit use of more
+            modern PBKDFs and allow for regulatory compliance.
+      </t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+        <t>The <xref target="RFC7292">PKCS #12</xref> format is widely used
+        for interoperable transfer of certificate, key, and other
+        miscellaneous secrets between machines, applications, browsers, etc.
+        Unfortunately, the original specification mandates the use
+        of a specific password based key derivation function, allowing
+        only for change of the underlying message digest function.</t>
+    </section>
+
+    <section title="Rationale">
+        <t>Due to security concerns with PBKDF1 and much higher extensibility
+        of PBMAC1, we propose the use of PBMAC1 for integrity protection
+        of PKCS #12 structures. The new syntax is designed to allow legacy
+        applications to still be able to decrypt the key material, even if they
+        are unable to interpret the new integrity protection, provided that
+        they can ignore failures in MAC verification.
+        Use of the extensible PBMAC1 mechanism also allows for greater
+        flexibility and alignment to different government regulations.
+        </t>
+        <t>As recommended methods for key protection require both encryption
+        and integrity protection, We've decided to amend the PKCS #12 format
+        to support different key derivation functions rather than extending the
+        PKCS #5 by a new field allowing integrity protection.
+        </t>
+    </section>
+
+    <section title="Requirements Language">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+      document are to be interpreted as described in <xref
+      target="RFC2119">RFC 2119</xref>.</t>
+    </section>
+
+    <!-- This PI places the pagebreak correctly (before the section title) in the text output. -->
+
+    <?rfc needLines="8" ?>
+
+    <section title="Embedding PBMAC1 in PKCS #12">
+        <t>The MacData structure in the PFX object is changed as follows:
+        <list style="numbers">
+            <t>the id-PBMAC1 object identifier is permitted as a valid type
+                for the DigestAlgorithmIdentifier inside the DigestInfo object.
+                If the algorithm field of the DigestAlgorithmIdentifier is
+                id-PBMAC1, then the parameters field MUST be present and have
+                the value consistent with PBMAC1-params</t>
+            <t>if the PBMAC1 algorithm is used, the digest value of the
+                DigestInfo object MUST be the result of the PBMAC1 calculation
+                over the authSafe field using the PBMAC1-params parameters</t>
+            <t>if the PBMAC1 algorithm is used, the macSalt value MUST be
+                ignored, for backwards compatibility it SHOULD NOT be empty</t>
+            <t>if the PBMAC1 algorithm is used, the iteration value MUST be
+                ignored, for backwards compatibility it SHOULD have a non-zero
+                positive value</t>
+        </list>
+        </t>
+    </section>
+
+    <section title="Recommended parameters">
+        <t>To provide interoperability between different implementations,
+        all implementations of this specification MUST support the PBKDF2
+        key derivation function paired with SHA-256 HMAC. It's RECOMMENDED
+        for implementations to support other SHA-2 based HMACs.
+        Implementations MAY use other KDF methods, like the scrypt PBKDF
+        <xref target="RFC7914">RFC 7914</xref>.
+        </t>
+    </section>
+
+    <section title="Deprecated Algorithms">
+        <t>While attacks against SHA-1 HMACs are not considered practical
+            <xref target="RFC6194"/> to limit the number of algorithms needed
+            for interoperatbility implementations of this specifications
+            SHOULD NOT use PBKDF2 with the SHA-1 HMAC. Additionally
+            the implementation MUST NOT use any other message digest functions
+            with output of 160 bits or smaller.</t>
+    </section>
+
+    <!-- Possibly a 'Contributors' section ... -->
+
+    <section anchor="IANA" title="IANA Considerations">
+      <t>This memo includes no request to IANA.</t>
+    </section>
+
+    <section anchor="Security" title="Security Considerations">
+      <t>The security considerations from referenced documents apply.
+      </t>
+    </section>
+  </middle>
+
+  <!--  *****BACK MATTER ***** -->
+
+  <back>
+    <!-- References split into informative and normative -->
+
+    <!-- There are 2 ways to insert reference entries from the citation libraries:
+     1. define an ENTITY at the top, and use "ampersand character"RFC2629; here (as shown)
+     2. simply use a PI "less than character"?rfc include="reference.RFC.2119.xml"?> here
+        (for I-Ds: include="reference.I-D.narten-iana-considerations-rfc2434bis.xml")
+
+     Both are cited textually in the same manner: by using xref elements.
+     If you use the PI option, xml2rfc will, by default, try to find included files in the same
+     directory as the including file. You can also define the XML_LIBRARY environment variable
+     with a value containing a set of directories to search.  These can be either in the local
+     filing system or remote ones accessed by http (http://domain/dir/... ).-->
+
+    <references title="Normative References">
+      <!--?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"?-->
+      &RFC2119;
+
+      &RFC6194;
+
+      &RFC7292;
+
+      &RFC8018;
+
+    </references>
+
+    <references title="Informative References">
+
+      &RFC7914;
+
+    </references>
+
+    <section anchor="app-additional" title="Additional Stuff">
+      <t>This becomes an Appendix.</t>
+    </section>
+  </back>
+</rfc>
