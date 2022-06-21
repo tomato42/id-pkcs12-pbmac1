@@ -93,7 +93,7 @@
         flexibility and alignment to different government regulations.
         </t>
         <t>As recommended methods for key protection require both encryption
-        and integrity protection, We've decided to amend the PKCS #12 format
+        and integrity protection, we've decided to amend the PKCS #12 format
         to support different key derivation functions rather than extending the
         PKCS #5 by a new field allowing integrity protection.
         </t>
@@ -143,7 +143,7 @@
     <section title="Deprecated Algorithms">
         <t>While attacks against SHA-1 HMACs are not considered practical
             <xref target="RFC6194"/> to limit the number of algorithms needed
-            for interoperatbility implementations of this specifications
+            for interoperatbility, implementations of this specification
             SHOULD NOT use PBKDF2 with the SHA-1 HMAC. Additionally
             the implementation MUST NOT use any other message digest functions
             with output of 160 bits or smaller.</t>
