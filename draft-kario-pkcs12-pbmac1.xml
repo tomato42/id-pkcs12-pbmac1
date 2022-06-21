@@ -156,7 +156,14 @@
     </section>
 
     <section anchor="Security" title="Security Considerations">
-      <t>The security considerations from referenced documents apply.
+      <t>Except for use of different key derivation functions, this document
+        doesn't change how the integrity protection on PKCS #12 objects is
+        computed; therefore all the original security considerations from
+        <xref target="RFC7292">RFC 7292</xref> apply.
+      </t>
+      <t>Use of PBMAC1 and PBKDF2 is unchanged from <xref target="RFC8018">
+        RFC 8018</xref>; therefore all the original security considerations
+        apply.
       </t>
     </section>
   </middle>
