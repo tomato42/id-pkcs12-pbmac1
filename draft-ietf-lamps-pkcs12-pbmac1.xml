@@ -22,7 +22,7 @@
 <?rfc subcompact="no" ?>
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
-<rfc category="info" docName="draft-kario-pkcs12-pbmac1-00" ipr="trust200902"
+<rfc category="info" docName="draft-ietf-lamps-pkcs12-pbmac1-00" ipr="trust200902"
     updates="RFC7292">
   <!-- ***** FRONT MATTER ***** -->
 
