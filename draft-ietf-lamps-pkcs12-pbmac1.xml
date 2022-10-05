@@ -191,8 +191,8 @@
 
     </references>
 
-    <section anchor="app-additional" title="Additional Stuff">
-      <t>This becomes an Appendix.</t>
+    <section anchor="test-vectors" title="Test Vectors">
+      <t>TODO: Include few examples of PKCS#12 files with different parameters.</t>
     </section>
   </back>
 </rfc>
