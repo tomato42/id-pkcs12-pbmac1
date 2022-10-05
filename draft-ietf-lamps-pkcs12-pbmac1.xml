@@ -135,6 +135,8 @@
         all implementations of this specification MUST support the PBKDF2
         key derivation function paired with SHA-256 HMAC. It's RECOMMENDED
         for implementations to support other SHA-2 based HMACs.
+        Implementations MAY use other hash functions, like the SHA-3 famility
+        of hash functions <xref target="SHA3">SHA-3</xref>.
         Implementations MAY use other KDF methods, like the scrypt PBKDF
         <xref target="RFC7914">RFC 7914</xref>.
         </t>
@@ -188,6 +190,19 @@
     <references title="Informative References">
 
       &RFC7914;
+
+      <reference anchor="SHA3"
+                 target="https://doi.org/10.6028/NIST.FIPS.202">
+      <front>
+          <title>SHA-3 Standard: Permutation-Based Hash and Extendable-Output
+              Functions</title>
+          <author>
+              <organization>National Institute of Standards and Technology
+              </organization>
+          </author>
+          <date month="August" year="2015"/>
+      </front>
+      </reference>
 
     </references>
 
