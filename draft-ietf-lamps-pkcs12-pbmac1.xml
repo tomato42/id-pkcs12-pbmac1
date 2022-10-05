@@ -23,7 +23,7 @@
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
 <rfc category="info" docName="draft-ietf-lamps-pkcs12-pbmac1-00" ipr="trust200902"
-    updates="RFC7292">
+    updates="7292">
   <!-- ***** FRONT MATTER ***** -->
 
   <front>
@@ -62,10 +62,10 @@
     <keyword>pbmac1, pkcs12, pbkdf2</keyword>
 
     <abstract>
-        <t>This document specifies additions and amendments to <xref
-            target="RFC7292">RFC 7292</xref>. It defines a way to use
+        <t>This document specifies additions and amendments to
+            RFC 7292. It defines a way to use
             the Password Based Message Authentication Code 1, defined
-            in <xref target="RFC8018">RFC 8018</xref>, inside the PKCS #12
+            in RFC 8018, inside the PKCS #12
             syntax. The purpose of this specification is to permit use of more
             modern PBKDFs and allow for regulatory compliance.
       </t>
