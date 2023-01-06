@@ -181,8 +181,8 @@
       can facilitate brute-force attacks on the HMAC.
       Since the KDF parameters are not cryptographically protected and
       HMACs accept arbitrary key sizes,
-      implementations MAY refuse to process KDF paramters that specify small
-      key output sizes or weak paramters. It's RECOMMENDED to reject any KDF
+      implementations MAY refuse to process KDF parameters that specify small
+      key output sizes or weak parameters. It's RECOMMENDED to reject any KDF
       parameters that specify key lengths below 20 octets.
       </t>
     </section>
