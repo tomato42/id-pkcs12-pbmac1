@@ -22,7 +22,7 @@
 <?rfc subcompact="no" ?>
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
-<rfc category="info" docName="draft-ietf-lamps-pkcs12-pbmac1-02" ipr="trust200902"
+<rfc category="info" docName="draft-ietf-lamps-pkcs12-pbmac1-03" ipr="trust200902"
     updates="7292">
   <!-- ***** FRONT MATTER ***** -->
 
@@ -53,7 +53,7 @@
       </address>
     </author>
 
-    <date day="04" month="July" year="2023" />
+    <date day="25" month="October" year="2023" />
 
     <area>General</area>
 
@@ -78,19 +78,25 @@
         for interoperable transfer of certificate, key, and other
         miscellaneous secrets between machines, applications, browsers, etc.
         Unfortunately, the original specification mandates the use
-        of a specific password based key derivation function, allowing
-        only for change of the underlying message digest function.</t>
+        of a specific password based key derivation function, the PBKDF1,
+        allowing only for change of the underlying message digest function.</t>
     </section>
 
     <section title="Rationale">
         <t>Due to security concerns with PBKDF1 and much higher extensibility
-        of PBMAC1, we propose the use of PBMAC1 for integrity protection
+        of PBMAC1 <xref target="RFC8018"/>, we propose the use of PBMAC1
+        for integrity protection
         of PKCS #12 structures. The new syntax is designed to allow legacy
         applications to still be able to decrypt the key material, even if they
         are unable to interpret the new integrity protection, provided that
         they can ignore failures in MAC verification.
+        This change allows for use of PBKDF2 <xref target="RFC8018"/>
+        or scrypt <xref target="RFC7914"/>
+        KDFs for derivation of MAC keys and future extensibility.
         Use of the extensible PBMAC1 mechanism also allows for greater
-        flexibility and alignment to different government regulations.
+        flexibility and alignment to different government regulations,
+        for example, in environments where PBKDF2 is the only allowed
+        password-based key derivation function.
         </t>
         <t>As recommended methods for key protection require both encryption
         and integrity protection, we've decided to amend the PKCS #12 format
@@ -111,7 +117,9 @@
     <?rfc needLines="8" ?>
 
     <section title="Embedding PBMAC1 in PKCS #12">
-        <t>The MacData structure in the PFX object is changed as follows:
+        <t>The MacData structure in the PFX object
+            (see <xref target="RFC7292">section 4 of RFC 7292</xref>)
+            is changed as follows:
         <list style="numbers">
             <t>the id-PBMAC1 object identifier is permitted as a valid type
                 for the DigestAlgorithmIdentifier inside the DigestInfo object.
@@ -149,6 +157,15 @@
         MUST include the keyLen field in the encoded PBKDF2-params.
         Implementations MUST NOT accept PBKDF2 KDF with PBKDF2-params that
         omit the keyLen field.
+        </t>
+    </section>
+
+    <section title="Password encoding">
+        <t>As documented in <xref target="RFC7292">Appendix B.1 of RFC
+        7292</xref> handling of password encoding in the underlying standards
+        is underspecified. However, just as with PBES1 and PBES2 when used in
+        the context of PKCS#12 objects, all passwords used with PBMAC1 MUST
+        be created from BMPStrings with a NULL terminator.
         </t>
     </section>
 
