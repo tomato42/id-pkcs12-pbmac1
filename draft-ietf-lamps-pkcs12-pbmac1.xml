@@ -163,9 +163,9 @@
     <section title="Password encoding">
         <t>As documented in <xref target="RFC7292">Appendix B.1 of RFC
         7292</xref> handling of password encoding in the underlying standards
-        is underspecified. As such, it's RECOMMENDED to use the exact
-        same octet encoding of a password to the PBMAC1 as to PBES1 or PBES2,
-        which MUST be a BMPString with a NULL terminator.
+        is underspecified. However, just as with PBES1 and PBES2 when used in
+        the context of PKCS#12 objects, all passwords used with PBMAC1 MUST
+        be created from BMPStrings with a NULL terminator.
         </t>
     </section>
 
