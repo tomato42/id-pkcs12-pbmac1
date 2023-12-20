@@ -106,7 +106,7 @@
         <t>We have included an ASN.1 <xref target="x680"/><xref target="x681"/>
         <xref target="x682"/><xref target="x683"/><xref target="x690"/> that
         can be combined with the ASN.1 module in <xref target="RFC8018"/> to
-        incorporate additional MAC algorithms.
+        incorporate additional MAC algorithms.</t>
     </section>
 
     <section title="Requirements Language">
