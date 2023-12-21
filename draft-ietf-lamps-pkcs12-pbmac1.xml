@@ -305,17 +305,6 @@
       <seriesInfo name="ISO/IEC" value="8825-1:2021"/>
       </reference>
 
-         <front>
-            <title>Information Technology - Abstract Syntax
-            Notation One (ASN.1):  Specification of basic notation.
-            ITU-T Recommendation X.680 (2002) | ISO/IEC 8824-1:2002. 
-            </title>
-            <author/>
-            <date/>
-          </front>
-      </reference>
-
-
     </references>
 
     <references title="Informative References">
