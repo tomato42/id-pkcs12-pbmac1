@@ -23,7 +23,7 @@
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
 <rfc category="info" docName="draft-ietf-lamps-pkcs12-pbmac1-03" ipr="trust200902"
-    updates="7292">
+    updates="7292, 8018">
   <!-- ***** FRONT MATTER ***** -->
 
   <front>
@@ -63,7 +63,7 @@
 
     <abstract>
         <t>This document specifies additions and amendments to
-            RFC 7292. It defines a way to use
+            RFCs 7292 and 8018. It defines a way to use
             the Password Based Message Authentication Code 1, defined
             in RFC 8018, inside the PKCS #12
             syntax. The purpose of this specification is to permit use of more
@@ -103,6 +103,10 @@
         to support different key derivation functions rather than extending the
         PKCS #5 by a new field allowing integrity protection.
         </t>
+        <t>We have included an ASN.1 <xref target="x680"/><xref target="x681"/>
+        <xref target="x682"/><xref target="x683"/><xref target="x690"/> that
+        can be combined with the ASN.1 module in <xref target="RFC8018"/> to
+        incorporate additional MAC algorithms.</t>
     </section>
 
     <section title="Requirements Language">
@@ -220,6 +224,86 @@
       &RFC7292;
 
       &RFC8018;
+
+      <reference anchor="x680"
+                 target="https://www.itu.int/rec/T-REC-X.680">
+      <front>
+          <title>Information Technology - Abstract Syntax
+                 Notation One (ASN.1):  Specification of
+                 basic notation</title>
+          <author>
+              <organization>ITU-T
+              </organization>
+          </author>
+          <date month="February" year="2021"/>
+      </front>
+      <seriesInfo name="ITU-T Recommendation" value="X.680"/>
+      <seriesInfo name="ISO/IEC" value="8824-1:2021"/>
+      </reference>
+
+      <reference anchor="x681"
+                 target="https://www.itu.int/rec/T-REC-X.681">
+      <front>
+          <title>Information Technology - Abstract Syntax
+                 Notation One (ASN.1): Information object
+                 specification</title>
+          <author>
+              <organization>ITU-T
+              </organization>
+          </author>
+          <date month="February" year="2021"/>
+      </front>
+      <seriesInfo name="ITU-T Recommendation" value="X.681"/>
+      <seriesInfo name="ISO/IEC" value="8824-2:2021"/>
+      </reference>
+
+      <reference anchor="x682"
+                 target="https://www.itu.int/rec/T-REC-X.682">
+      <front>
+          <title>Information Technology - Abstract Syntax
+                 Notation One (ASN.1): Constraint specification</title>
+          <author>
+              <organization>ITU-T
+              </organization>
+          </author>
+          <date month="February" year="2021"/>
+      </front>
+      <seriesInfo name="ITU-T Recommendation" value="X.682"/>
+      <seriesInfo name="ISO/IEC" value="8824-3:2021"/>
+      </reference>
+
+      <reference anchor="x683"
+                 target="https://www.itu.int/rec/T-REC-X.683">
+      <front>
+          <title>Information Technology - Abstract Syntax
+                 Notation One (ASN.1): Parameterization of ASN.1
+                 specifications</title>
+          <author>
+              <organization>ITU-T
+              </organization>
+          </author>
+          <date month="February" year="2021"/>
+      </front>
+      <seriesInfo name="ITU-T Recommendation" value="X.683"/>
+      <seriesInfo name="ISO/IEC" value="8824-4:2021"/>
+      </reference>
+
+      <reference anchor="x690"
+                 target="https://www.itu.int/rec/T-REC-X.690">
+      <front>
+          <title>Information Technology - ASN.1 encoding rules:
+                 Specification of Basic Encoding Rules (BER),
+                 Canonical Encoding Rules (CER) and
+                 Distinguished Encoding Rules (DER)</title>
+          <author>
+              <organization>ITU-T
+              </organization>
+          </author>
+          <date month="February" year="2021"/>
+      </front>
+      <seriesInfo name="ITU-T Recommendation" value="X.690"/>
+      <seriesInfo name="ISO/IEC" value="8825-1:2021"/>
+      </reference>
 
     </references>
 
@@ -631,5 +715,124 @@ b0c8OLAuMXMCAggA
           </t>
        </section>
     </section>
+
+    <section anchor="asn1-module" title="ASN.1 Module">
+      <t>This appendix documents ASN.1 <xref target="x680"/>
+         <xref target="x681"/><xref target="x682"/><xref target="x683"/>
+         <xref target="x690"/> types, values, and object sets for
+         this specification.  It does so by providing an ASN.1 module
+         called PKCS12-PBMAC1-2023.</t>
+      <t>Combine this module with the PKCS-12 ASN.1 module found in Appendix
+         D of <xref target="RFC8018"/> to add SHA-2 based HMACs by
+         replacing the PBKDF2-PRFs class found therein.</t>
+      <artwork>
+PKCS12-PBMAC1-2023
+  { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
+    smime(16) id-mod(0) pbkc12-pbamc1-2023(TBD) }
+
+DEFINITIONS EXPLICIT TAGS ::=
+BEGIN
+
+IMPORTS
+
+AlgorithmIdentifier, ALGORITHM-IDENTIFIER, rsadsi
+  FROM PKCS5v2-1 -- From [RFC8018]
+   { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-5(5)
+     modules(16) pkcs5v2-1(2) }
+;
+
+-- object identifier arcs
+
+pkcs OBJECT IDENTIFIER ::= { rsadsi 1 }
+
+pkcs-5 OBJECT IDENTIFIER ::= { pkcs 5 }
+
+digestAlgorithm OBJECT IDENTIFIER ::= { rsadsi 2 }
+
+-- HMAC object identifiers
+
+id-hmacWithSHA1 OBJECT IDENTIFIER ::= { digestAlgorithm 7 }
+
+id-hmacWithSHA224 OBJECT IDENTIFIER ::= { digestAlgorithm 8 }
+
+id-hmacWithSHA256 OBJECT IDENTIFIER ::= { digestAlgorithm 9 }
+
+id-hmacWithSHA384 OBJECT IDENTIFIER ::= { digestAlgorithm 10 }
+
+id-hmacWithSHA512 OBJECT IDENTIFIER ::= { digestAlgorithm 11 }
+
+id-hmacWithSHA512-224 OBJECT IDENTIFIER ::= { digestAlgorithm 12 }
+
+id-hmacWithSHA512-256 OBJECT IDENTIFIER ::= { digestAlgorithm 13 }
+
+
+-- PBKDF2-PRF algorithm identifiers
+
+PBKDF2-PRFs ALGORITHM-IDENTIFIER ::= {
+  { NULL IDENTIFIED BY id-hmacWithSHA1 }       |
+  { NULL IDENTIFIED BY id-hmacWithSHA224 }     |
+  { NULL IDENTIFIED BY id-hmacWithSHA256 }     |
+  { NULL IDENTIFIED BY id-hmacWithSHA384 }     |
+  { NULL IDENTIFIED BY id-hmacWithSHA512 }     |
+  { NULL IDENTIFIED BY id-hmacWithSHA512-224 } |
+  { NULL IDENTIFIED BY id-hmacWithSHA512-256 },
+  ...
+  }
+
+
+-- HMAC algorithm identifiers
+
+algid-hmacWithSHA1 AlgorithmIdentifier {{PBKDF2-PRFs}} ::=
+  { algorithm id-hmacWithSHA1, parameters NULL : NULL }
+
+algid-hmacWithSHA224 AlgorithmIdentifier {{PBKDF2-PRFs}} ::=
+  { algorithm id-hmacWithSHA224, parameters NULL : NULL }
+
+algid-hmacWithSHA256 AlgorithmIdentifier {{PBKDF2-PRFs}} ::=
+  { algorithm id-hmacWithSHA256, parameters NULL : NULL }
+
+algid-hmacWithSHA384 AlgorithmIdentifier {{PBKDF2-PRFs}} ::=
+  { algorithm id-hmacWithSHA384, parameters NULL : NULL }
+
+algid-hmacWithSHA512 AlgorithmIdentifier {{PBKDF2-PRFs}} ::=
+  { algorithm id-hmacWithSHA512, parameters NULL : NULL }
+
+algid-hmacWithSHA512-224 AlgorithmIdentifier {{PBKDF2-PRFs}} ::=
+  { algorithm id-hmacWithSHA512-224, parameters NULL : NULL }
+
+algid-hmacWithSHA512-256 AlgorithmIdentifier {{PBKDF2-PRFs}} ::=
+  { algorithm id-hmacWithSHA512-256, parameters NULL : NULL }
+
+-- PBMAC1-params
+
+PBMAC1-params ::=  SEQUENCE {
+  keyDerivationFunc AlgorithmIdentifier {{PBMAC1-KDFs}},
+  messageAuthScheme AlgorithmIdentifier {{PBMAC1-MACs}} }
+
+PBMAC1-KDFs ALGORITHM-IDENTIFIER ::= {
+  { PBKDF2-params IDENTIFIED BY id-PBKDF2},
+  ...
+}
+
+PBMAC1-MACs ALGORITHM-IDENTIFIER ::= { ... }
+
+id-PBKDF2 OBJECT IDENTIFIER ::= { pkcs-5 12 }
+
+PBKDF2-params ::= SEQUENCE {
+  salt CHOICE {
+    specified OCTET STRING,
+    otherSource AlgorithmIdentifier {{PBKDF2-SaltSources}}
+  },
+  iterationCount INTEGER (1..MAX),
+  keyLength INTEGER (1..MAX) OPTIONAL,
+  prf AlgorithmIdentifier {{PBKDF2-PRFs}} DEFAULT algid-hmacWithSHA1
+}
+
+PBKDF2-SaltSources ALGORITHM-IDENTIFIER ::= { ... }
+
+END
+      </artwork>
+    </section>
+
   </back>
 </rfc>
