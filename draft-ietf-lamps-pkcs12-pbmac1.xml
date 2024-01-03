@@ -185,7 +185,9 @@
     <!-- Possibly a 'Contributors' section ... -->
 
     <section anchor="IANA" title="IANA Considerations">
-      <t>This memo includes no request to IANA.</t>
+      <t>IANA is requested to assign an object identifier from the
+         SMI Security for S/MIME Module Identifier registry for the
+         ASN.1 module found in Appendix B.</t>
     </section>
 
     <section anchor="Security" title="Security Considerations">
