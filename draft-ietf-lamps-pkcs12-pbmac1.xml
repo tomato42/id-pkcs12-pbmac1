@@ -181,7 +181,7 @@
     <!-- Possibly a 'Contributors' section ... -->
 
     <section anchor="IANA" title="IANA Considerations">
-      <t>IANA is requested to assign and object identifier from the
+      <t>IANA is requested to assign an object identifier from the
          SMI Security for S/MIME Module Identifier registry for the
          ASN.1 module found in Appendix B.</t>
     </section>
