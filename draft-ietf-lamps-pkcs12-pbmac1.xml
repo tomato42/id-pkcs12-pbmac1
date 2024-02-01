@@ -23,7 +23,7 @@
 <?rfc subcompact="no" ?>
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
-<rfc category="info" docName="draft-ietf-lamps-pkcs12-pbmac1-05" ipr="trust200902"
+<rfc category="info" docName="draft-ietf-lamps-pkcs12-pbmac1-06" ipr="trust200902"
     updates="7292, 8018">
   <!-- ***** FRONT MATTER ***** -->
 
@@ -68,7 +68,8 @@
             the Password Based Message Authentication Code 1, defined
             in RFC 8018, inside the PKCS #12
             syntax. The purpose of this specification is to permit use of more
-            modern PBKDFs and allow for regulatory compliance.
+            modern Password-Based Key Derivation Functions (PBKDFs)
+            and allow for regulatory compliance.
       </t>
     </abstract>
   </front>
@@ -152,7 +153,7 @@
         for both integrity
         check and as the PBKDF2 pseudorandom function (PRF). It's RECOMMENDED
         for implementations to support other SHA-2 based HMACs.
-        Implementations MAY use other hash functions, like the SHA-3 famility
+        Implementations MAY use other hash functions, like the SHA-3 family
         of hash functions <xref target="SHA3">SHA-3</xref>.
         Implementations MAY use other KDF methods, like the scrypt PBKDF
         <xref target="RFC7914"/>.
