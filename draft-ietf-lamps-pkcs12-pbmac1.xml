@@ -23,7 +23,7 @@
 <?rfc subcompact="no" ?>
 <!-- keep one blank line between list items -->
 <!-- end of list of popular I-D processing instructions -->
-<rfc category="info" docName="draft-ietf-lamps-pkcs12-pbmac1-06" ipr="trust200902"
+<rfc category="info" docName="draft-ietf-lamps-pkcs12-pbmac1-07" ipr="trust200902"
     updates="7292, 8018">
   <!-- ***** FRONT MATTER ***** -->
 
@@ -54,7 +54,7 @@
       </address>
     </author>
 
-    <date day="1" month="February" year="2024" />
+    <date day="8" month="February" year="2024" />
 
     <area>General</area>
 
@@ -105,8 +105,9 @@
         to support different key derivation functions rather than extending the
         PKCS #5 by a new field allowing integrity protection.
         </t>
-        <t>We have included an ASN.1 <xref target="x680"/><xref target="x681"/>
-        <xref target="x682"/><xref target="x683"/><xref target="x690"/> that
+        <t>We have included an ASN.1 module <xref target="x680"/>
+        <xref target="x681"/><xref target="x682"/><xref target="x683"/>
+        <xref target="x690"/> that
         can be combined with the ASN.1 module in <xref target="RFC8018"/> to
         incorporate additional MAC algorithms.</t>
     </section>
@@ -123,9 +124,9 @@
     <?rfc needLines="8" ?>
 
     <section title="Embedding PBMAC1 in PKCS #12">
-        <t>The MacData structure in the PFX object
-            (see <xref target="RFC7292">section 4 of RFC 7292</xref>)
-            is changed as follows:
+        <t>The MacData structure in the PFX object, as described in
+            <xref target="RFC7292">bullet #3 in section 4 of RFC 7292</xref>,
+            is updated to include this additional PBMAC1-specific guidance:
         <list style="numbers">
             <t>the id-PBMAC1 object identifier is permitted as a valid type
                 for the DigestAlgorithmIdentifier inside the DigestInfo object.
@@ -137,7 +138,7 @@
                 over the authSafe field using the PBMAC1-params parameters</t>
             <t>if the PBMAC1 algorithm is used, the macSalt value MUST be
                 ignored, for backwards compatibility it SHOULD NOT be empty</t>
-            <t>if the PBMAC1 algorithm is used, the iteration value MUST be
+            <t>if the PBMAC1 algorithm is used, the iterations value MUST be
                 ignored, for backwards compatibility it SHOULD have a non-zero
                 positive value</t>
         </list>
