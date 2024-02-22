@@ -743,7 +743,7 @@ b0c8OLAuMXMCAggA
     </section>
 
     <section anchor="asn1-module" title="ASN.1 Module">
-      <t>Note to RFC Editor: please change the TBD value below iwtha a value
+      <t>Note to RFC Editor: please change the TBD value below with the value
          assigned by IANA</t>
       <t>This appendix documents ASN.1 <xref target="x680"/>
          <xref target="x681"/><xref target="x682"/><xref target="x683"/>
