@@ -756,7 +756,7 @@ b0c8OLAuMXMCAggA
       <artwork>
 PKCS12-PBMAC1-2023
   { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs9(9)
-    smime(16) id-mod(0) pbkc12-pbamc1-2023(TBD) }
+    smime(16) id-mod(0) id-pkcs12-pbmac1-2023(TBD) }
 
 DEFINITIONS EXPLICIT TAGS ::=
 BEGIN
