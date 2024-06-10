@@ -7,12 +7,11 @@
   <!ENTITY wj     "&#8288;">
 ]>
 
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="info" docName="draft-ietf-lamps-rfc9579bis-00" number="9579" ipr="trust200902" updates="7292, 8018" obsoletes="9579" submissionType="IETF" xml:lang="en" consensus="true" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" version="3">
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" category="info" docName="draft-ietf-lamps-rfc9579bis-00" ipr="trust200902" updates="7292, 8018" obsoletes="9579" xml:lang="en" tocInclude="true" tocDepth="4" symRefs="true" sortRefs="true" version="3">
 
   <front>
     <title abbrev="PBMAC1 in PKCS #12">Use of Password-Based Message
     Authentication Code 1 (PBMAC1) in PKCS #12 Syntax</title>
-    <seriesInfo name="RFC" value="9579"/>
     <author fullname="Hubert Kario" initials="H." surname="Kario">
       <organization>Red Hat, Inc.</organization>
       <address>
@@ -36,7 +35,8 @@
 
     <abstract>
       <t>This document specifies additions and amendments to
-            RFCs 7292 and 8018. It defines a way to use
+      RFCs 7292 and 8018. It obsoletes the RFC 9579.
+      It defines a way to use
             the Password-Based Message Authentication Code 1 (PBMAC1), defined
             in RFC 8018, inside the PKCS #12
             syntax. The purpose of this specification is to permit the use of more
