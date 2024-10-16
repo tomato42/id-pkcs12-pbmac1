@@ -207,6 +207,17 @@
   </tbody>
 </table>
 
+    <section anchor="Changes" numbered="true" toc="default">
+      <name>Changes since RFC 9579</name>
+      <t>This document changes the specified format of password passed to
+        the key derivation function. Previously it was a BMPString, now
+        it's declared as a UTF8String. It should be noted that the
+        test vectors attached to <xref target="RFC9579" format="default"/>
+        use UTF8String encoding. This resolves
+        <xref target="Err7974" format="default"/>.
+      </t>
+    </section>
+
 
     </section>
     <section anchor="Security" numbered="true" toc="default">
@@ -230,6 +241,7 @@
       parameters that specify key lengths less than 20 octets.
       </t>
     </section>
+
   </middle>
 
   <back>
@@ -244,6 +256,7 @@
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7292.xml"/>
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8018.xml"/>
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9579.xml"/>
 
         <reference anchor="x680" target="https://www.itu.int/rec/T-REC-X.680">
           <front>
@@ -346,6 +359,12 @@
           </front>
 	  <seriesInfo name="FIPS PUB" value="202"/>
 	  <seriesInfo name="DOI" value="10.6028/NIST.FIPS.202"/>
+        </reference>
+        <reference anchor="Err7974" target="https://www.rfc-editor.org/errata/eid7974">
+          <front>
+              <title>RFC Errata Report 7974, RFC 9579,</title>
+              <author fullname="Alicja Kario" />
+          </front>
         </reference>
       </references>
     </references>
