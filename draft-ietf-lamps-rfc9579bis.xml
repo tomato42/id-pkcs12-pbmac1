@@ -206,7 +206,7 @@
     </tr>
   </tbody>
 </table>
-
+    </section>
     <section anchor="Changes" numbered="true" toc="default">
       <name>Changes since RFC 9579</name>
       <t>This document changes the specified format of password passed to
@@ -216,9 +216,6 @@
         use UTF8String encoding. This resolves
         <xref target="Err7974" format="default"/>.
       </t>
-    </section>
-
-
     </section>
     <section anchor="Security" numbered="true" toc="default">
       <name>Security Considerations</name>
