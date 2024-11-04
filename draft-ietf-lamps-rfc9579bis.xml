@@ -187,7 +187,9 @@
     <section anchor="IANA" numbered="true" toc="default">
       <name>IANA Considerations</name>
       <t>IANA has registered the following object identifier in the
-         "SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)" registry. See <xref target="asn1-module"/> for the ASN.1 module. </t>
+          "SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)" registry. See <xref target="asn1-module"/> for the ASN.1 module. </t>
+      <!-- [rfced] please remove the following parargaph -->
+      <t>We ask IANA to update the reference to point to this new document.</t>
 
 <table anchor="iana-table">
   <name></name>
@@ -202,7 +204,7 @@
     <tr>
       <td>76</td>
       <td>id-pkcs12-pbmac1-2023</td>
-      <td>RFC 9579</td>
+      <td>[this document]</td>
     </tr>
   </tbody>
 </table>
