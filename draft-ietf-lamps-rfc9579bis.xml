@@ -166,9 +166,11 @@
       <name>Password Encoding</name>
       <t>As documented in <xref target="RFC7292" sectionFormat="of"
       section="B.1"/>, the handling of password encoding in the underlying
-      standards is underspecified. However, unlike with PBES1
+      standards is underspecified. However, unlike with Password Based
+      Encryption Scheme 1 (PBES1) <xref target="RFC8018"/>
       when used in the context of PKCS #12 or the MAC algorithm described
-      in <xref target="RFC7292"/>, all passwords used with PBMAC1
+      in <xref target="RFC7292"/> (which use BMPString with NULL-termination),
+      all passwords used with PBMAC1
       <bcp14>MUST</bcp14> be created from UTF-8 encoding without a NULL
       terminator or Byte Order Mark (BOM).
       </t>
