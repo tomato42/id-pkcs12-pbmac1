@@ -24,7 +24,7 @@
         <email>hkario@redhat.com</email>
       </address>
     </author>
-    <date day="21" month="January" year="2025"/>
+    <date day="25" month="April" year="2025"/>
 
     <area>SEC</area>
     <workgroup>lamps</workgroup>
@@ -35,7 +35,7 @@
 
     <abstract>
       <t>This document specifies additions and amendments to
-      RFCs 7292 and 8018. It obsoletes the RFC 9579.
+      RFCs 7292 and 8018. It also obsoletes the RFC 9579.
       It defines a way to use
             the Password-Based Message Authentication Code 1 (PBMAC1), defined
             in RFC 8018, inside the PKCS #12
@@ -55,6 +55,16 @@
         Unfortunately, <xref target="RFC7292" format="default"/> mandates the use
         of a PKCS #12 specific password-based key derivation function
         that only allows for change of the underlying message digest function.</t>
+        <section anchor="Changes" numbered="true" toc="default">
+          <name>Changes since RFC 9579</name>
+          <t>This document changes the specified format of password passed to
+            the key derivation function. Previously it was a BMPString, now
+            it's declared as a UTF8String. It should be noted that the
+            test vectors attached to <xref target="RFC9579" format="default"/>
+            use UTF8String encoding. This resolves
+            <xref target="Err7974" format="default"/>.
+          </t>
+        </section>
     </section>
     <section numbered="true" toc="default">
       <name>Rationale</name>
@@ -171,7 +181,8 @@
       when used in the context of PKCS #12 or the MAC algorithm described
       in <xref target="RFC7292"/> (which use BMPString with NULL-termination),
       all passwords used with PBMAC1
-      <bcp14>MUST</bcp14> be created from UTF-8 encoding without a NULL
+      <bcp14>MUST</bcp14> be created from UTF-8 <xref target="RFC3629"/>
+      encoding without a NULL
       terminator or Byte Order Mark (BOM).
       </t>
     </section>
@@ -211,16 +222,6 @@
   </tbody>
 </table>
     </section>
-    <section anchor="Changes" numbered="true" toc="default">
-      <name>Changes since RFC 9579</name>
-      <t>This document changes the specified format of password passed to
-        the key derivation function. Previously it was a BMPString, now
-        it's declared as a UTF8String. It should be noted that the
-        test vectors attached to <xref target="RFC9579" format="default"/>
-        use UTF8String encoding. This resolves
-        <xref target="Err7974" format="default"/>.
-      </t>
-    </section>
     <section anchor="Security" numbered="true" toc="default">
       <name>Security Considerations</name>
       <t>Except for the use of different key derivation functions, this document
@@ -253,11 +254,11 @@
         <name>Normative References</name>
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2104.xml"/>
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.3629.xml"/>
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.6194.xml"/>
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7292.xml"/>
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8018.xml"/>
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
-        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9579.xml"/>
 
         <reference anchor="x680" target="https://www.itu.int/rec/T-REC-X.680">
           <front>
@@ -347,6 +348,7 @@
       <references>
         <name>Informative References</name>
         <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7914.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9579.xml"/>
 
         <reference anchor="SHA3" target="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.202.pdf">
           <front>
